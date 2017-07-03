@@ -1,0 +1,25 @@
+{
+  "name": "json-multi-sort",
+  "version": "0.1.0",
+  "description": "Sort a JSON Array based on multiple keys.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "json",
+    "array",
+    "sort",
+    "multiple"
+  ],
+  "author": "Ayush Gupta",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AyushG3112/json-multi-sort.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AyushG3112/json-multi-sort/issues"
+  },
+  "homepage": "https://github.com/AyushG3112/json-multi-sort#readme"
+}
