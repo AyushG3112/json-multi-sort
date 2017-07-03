@@ -3,9 +3,9 @@ const checker = require('javascript-type-checker');
 class Sort {
 
   doSort(arrayToSort, sortJson) {
-    if(!this.isArray(arrayToSort)) {
+    if(!checker.isArray(arrayToSort)) {
       throw new Error('Argument to sort is not an array');
-    } else if(!this.isObject(sortJson)){
+    } else if(!checker.isObject(sortJson)){
       throw new Error('Sort parameters is not an object');
     }
     return arrayToSort.sort((a,b) => {
@@ -71,3 +71,5 @@ class Sort {
     });
   }
 }
+
+module.exports = Sort;
