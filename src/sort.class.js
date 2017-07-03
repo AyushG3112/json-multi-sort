@@ -1,4 +1,7 @@
+const checker = require('javascript-type-checker');
+
 class Sort {
+
   doSort(arrayToSort, sortJson) {
     if(!this.isArray(arrayToSort)) {
       throw new Error('Argument to sort is not an array');
@@ -12,55 +15,59 @@ class Sort {
         const splitIndexArray = keyList[i].split('.');
         for(let i in splitIndexArray) {
           aval = aval[splitIndexArray[i]];
-          if(aval === null || aval === undefined) {
+          if(checker.isNull(aval) || checker.isUndefined(aval)) {
             break;
           }
         }
         for(let i in splitIndexArray) {
           bval = bval[splitIndexArray[i]];
-          if(bval === null || bval === undefined) {
+          if(checker.isNull(bval) || checker.isUndefined(bval)) {
             break;
           }
         }
 
-        if(aval === null || aval === undefined) {
+        if(checker.isNull(aval) || checker.isUndefined(aval)) {
           return -1;
         }
 
-        if(bval === null || bval === undefined) {
+        if(checker.isNull(bval) || checker.isUndefined(bval)) {
           return 1;
         }
 
-        if(Object.prototype.toString.call(aval) !== Object.prototype.toString.call(bval)) {
+        if(checker.getType(aval) !== checker.getType(bval)) {
           throw new Error('Type of corresponding keys in all elements must be same if keys exist');
         }
-        if(this.isArray(aval)) {
+        if(checker.isArray(aval)) {
           aval = aval.length;
         }
 
-        if(this.isArray(bval)) {
+        if(checker.isArray(bval)) {
           bval = bval.length;
         }
 
+        if(checker.isObject(aval)) {
+          aval = Object.getOwnPropertyNames(aval).length;
+        }
+
+        if(checker.isObject(bval)) {
+          bval = Object.getOwnPropertyNames(bval).length;
+        }
+
+        let sortVal = 1;
+        if(sortJson[keyList[i]] === -1) {
+          sortVal = -1;
+        }
         if(aval !== bval) {
-          if(typeof(aval) === "number"){
-            return (aval-bval)*sortJson[keyList[i]];
-          } else if(typeof(aval) === "boolean") {
-            return (aval?-1:1)*sortJson[keyList[i]];
-          } else if(typeof(aval) === "string") { 
-            return ((aval.toLowerCase()<bval.toLowerCase())?-1:1)*sortJson[keyList[i]];
+          if(checker.getType(aval) === "number"){
+            return (aval-bval)*sortVal;
+          } else if(checker.getType(aval) === "boolean") {
+            return (aval?-1:1)*sortVal;
+          } else if(checker.getType(aval) === "string") { 
+            return ((aval.toLowerCase()<bval.toLowerCase())?-1:1)*sortVal;
           }
         }
       }
       return -1;
     });
-  }
-
-  isArray(object) {
-    return Object.prototype.toString.call(object) ===  "[object Array]";
-  }
-
-  isObject(object) {
-    return Object.prototype.toString.call(object) ===  "[object Object]";
   }
 }
