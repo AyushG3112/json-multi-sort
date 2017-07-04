@@ -1,6 +1,6 @@
 {
   "name": "json-multi-sort",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Sort a JSON Array based on multiple keys.",
   "main": "index.js",
   "scripts": {
